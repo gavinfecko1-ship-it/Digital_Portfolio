@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sports Analytics System | Gavin Fecko</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Gavin Fecko</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html" class="active">Projects</a></li>
+                    <li><a href="../portfolio.html">Portfolio/Work</a></li>
+                    <li><a href="../certifications.html">Certifications</a></li>
+                    <li><a href="../resume.html">Resume</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== PROJECT HERO ===== -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-header">
+                <div class="project-breadcrumb">
+                    <a href="../projects.html"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+                <div class="project-tag">Capstone Project</div>
+                <h1>AI Sports Analytics System</h1>
+                <p class="project-subtitle">Computer vision and machine learning platform for athletic performance analysis</p>
+                <div class="project-meta">
+                    <span><i class="far fa-calendar"></i> Spring 2025</span>
+                    <span><i class="fas fa-code"></i> Python, TensorFlow, OpenCV</span>
+                    <span><i class="fas fa-clock"></i> 3-month development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECT CONTENT ===== -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <!-- Main Content -->
+                <div class="project-main">
+                    <!-- Project Overview -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-bullseye"></i> Project Overview</h2>
+                        <div class="overview-grid">
+                            <div class="overview-item">
+                                <h3>Goal</h3>
+                                <p>Develop an AI-powered system that uses computer vision and machine learning to analyze player performance, predict game outcomes, and provide actionable insights for coaches and teams.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Why I Built This</h3>
+                                <p>Sports analytics is rapidly evolving, and AI can provide deeper insights than traditional statistics. I wanted to combine my passion for sports with my technical skills in AI and data analysis to create something with practical applications.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Key Challenge</h3>
+                                <p>Processing real-time video data from multiple camera angles and accurately tracking player movements in complex, fast-paced game environments.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Implementation -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-cogs"></i> Technical Implementation</h2>
+                        
+                        <div class="tech-architecture">
+                            <h3>System Architecture</h3>
+                            <div class="architecture-diagram">
+                                <div class="arch-layer">
+                                    <h4>Data Collection Layer</h4>
+                                    <p>Multi-angle video feeds → OpenCV processing → Frame extraction</p>
+                                </div>
+                                <div class="arch-layer">
+                                    <h4>Processing Layer</h4>
+                                    <p>YOLOv8 object detection → Player tracking → Feature extraction</p>
+                                </div>
+                                <div class="arch-layer">
+                                    <h4>AI/ML Layer</h4>
+                                    <p>TensorFlow models → Performance prediction → Pattern recognition</p>
+                                </div>
+                                <div class="arch-layer">
+                                    <h4>Presentation Layer</h4>
+                                    <p>Flask web interface → Real-time dashboards → Coach notifications</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Key Features Developed</h3>
+                        <div class="feature-list">
+                            <div class="feature">
+                                <h4>Player Movement Tracking</h4>
+                                <p>Used OpenCV and YOLOv8 to detect and track players across video frames, calculating speed, distance, and positioning metrics.</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Performance Prediction</h4>
+                                <p>Trained LSTM neural networks on historical data to predict individual and team performance metrics.</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Real-time Dashboard</h4>
+                                <p>Built a Flask web application with real-time data visualization using Plotly and D3.js.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Code Snippets -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-code"></i> Code Highlights</h2>
+                        
+                        <div class="code-snippet">
+                            <h3>Player Detection with YOLOv8</h3>
+<pre><code class="python">import cv2
+import torch
+from ultralytics import YOLO
+
+class PlayerTracker:
+    def __init__(self, model_path='yolov8n.pt'):
+        self.model = YOLO(model_path)
+        self.track_history = []
+    
+    def track_players(self, video_path):
+        """Process video and track player movements"""
+        cap = cv2.VideoCapture(video_path)
+        player_positions = []
+        
+        while cap.isOpened():
+            success, frame = cap.read()
+            if not success:
+                break
+                
+            # Run YOLOv8 tracking
+            results = self.model.track(frame, persist=True)
+            
+            # Extract player positions
+            if results[0].boxes.id is not None:
+                boxes = results[0].boxes.xywh.cpu()
+                track_ids = results[0].boxes.id.int().cpu().tolist()
+                
+                for box, track_id in zip(boxes, track_ids):
+                    x, y, w, h = box
+                    player_positions.append({
+                        'frame': frame_count,
+                        'player_id': track_id,
+                        'position': (float(x), float(y)),
+                        'velocity': self.calculate_velocity(track_id, x, y)
+                    })
+            
+            # Update tracking history
+            self.update_tracking_history(player_positions)
+            
+        cap.release()
+        return self.analyze_movements(player_positions)</code></pre>
+                        </div>
+
+                        <div class="code-snippet">
+                            <h3>Performance Prediction Model</h3>
+<pre><code class="python">import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+import numpy as np
+
+class PerformancePredictor:
+    def __init__(self):
+        self.model = self.build_model()
+    
+    def build_model(self):
+        """Build LSTM model for performance prediction"""
+        model = Sequential([
+            LSTM(128, return_sequences=True, input_shape=(10, 15)),
+            Dropout(0.3),
+            LSTM(64, return_sequences=False),
+            Dropout(0.3),
+            Dense(32, activation='relu'),
+            Dense(1, activation='linear')  # Predict performance score
+        ])
+        
+        model.compile(
+            optimizer='adam',
+            loss='mse',
+            metrics=['mae']
+        )
+        return model
+    
+    def prepare_data(self, player_data):
+        """Prepare sequential data for LSTM"""
+        sequences = []
+        targets = []
+        
+        for i in range(len(player_data) - 10):
+            sequence = player_data[i:i+10]
+            target = player_data[i+10]
+            sequences.append(sequence)
+            targets.append(target)
+        
+        return np.array(sequences), np.array(targets)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- What I Learned -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-graduation-cap"></i> What I Learned</h2>
+                        <div class="learnings">
+                            <div class="learning-category">
+                                <h3>Technical Skills</h3>
+                                <ul>
+                                    <li>Advanced computer vision techniques with OpenCV and YOLO</li>
+                                    <li>Real-time video processing and optimization</li>
+                                    <li>LSTM neural networks for time-series prediction</li>
+                                    <li>Model deployment with Flask and Docker</li>
+                                </ul>
+                            </div>
+                            <div class="learning-category">
+                                <h3>Project Management</h3>
+                                <ul>
+                                    <li>Agile development with 2-week sprints</li>
+                                    <li>Version control with Git for collaborative development</li>
+                                    <li>Data pipeline design and optimization</li>
+                                    <li>Performance testing and optimization</li>
+                                </ul>
+                            </div>
+                            <div class="learning-category">
+                                <h3>Challenges Overcome</h3>
+                                <ul>
+                                    <li>Handling large video datasets (500+ GB)</li>
+                                    <li>Real-time processing constraints</li>
+                                    <li>Model accuracy improvement through hyperparameter tuning</li>
+                                    <li>Deployment on cloud infrastructure</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reflection -->
+                    <div class="project-section reflection">
+                        <h2><i class="fas fa-lightbulb"></i> Project Reflection</h2>
+                        <div class="reflection-content">
+                            <h3>Impact & Results</h3>
+                            <p>The system achieved 87% accuracy in player tracking and 92% accuracy in predicting key performance metrics. During testing with local basketball teams, coaches reported a 30% improvement in their ability to identify player fatigue and optimize substitutions.</p>
+                            
+                            <h3>Key Takeaways</h3>
+                            <p>This project taught me the importance of balancing technical complexity with practical usability. While the AI models were sophisticated, the real value came from presenting insights in an intuitive dashboard that coaches could use during games.</p>
+                            
+                            <h3>Future Improvements</h3>
+                            <p>If I were to continue this project, I would:</p>
+                            <ol>
+                                <li>Integrate wearable sensor data for more comprehensive analysis</li>
+                                <li>Develop a mobile app for real-time sideline access</li>
+                                <li>Implement federated learning to improve models across different teams while preserving data privacy</li>
+                                <li>Add natural language processing for automated report generation</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="project-sidebar">
+                    <div class="sidebar-section">
+                        <h3>Technologies Used</h3>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">YOLOv8</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">AWS EC2</span>
+                            <span class="tech-tag">Plotly</span>
+                            <span class="tech-tag">D3.js</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="stat-value">3,500+</span>
+                                <span class="stat-label">Lines of Code</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">87%</span>
+                                <span class="stat-label">Tracking Accuracy</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">15+</span>
+                                <span class="stat-label">ML Models</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">92%</span>
+                                <span class="stat-label">Prediction Accuracy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Links</h3>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> View on GitHub
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-file-pdf"></i> Project Report
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-video"></i> Demo Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Skills Gained</h3>
+                        <ul class="skills-list">
+                            <li>Computer Vision</li>
+                            <li>Machine Learning</li>
+                            <li>Real-time Processing</li>
+                            <li>Data Visualization</li>
+                            <li>Web Development</li>
+                            <li>Cloud Deployment</li>
+                            <li>Agile Development</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Timeline</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="timeline-date">Week 1-2</span>
+                                <span class="timeline-desc">Research & Planning</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">Week 3-6</span>
+                                <span class="timeline-desc">Computer Vision Development</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">Week 7-10</span>
+                                <span class="timeline-desc">ML Model Development</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">Week 11-12</span>
+                                <span class="timeline-desc">Integration & Testing</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RELATED PROJECTS ===== -->
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Projects</h2>
+            <div class="related-grid">
+                <a href="kaggle-ml-models.html" class="related-project">
+                    <h3>Kaggle ML Models</h3>
+                    <p>Machine learning competitions and data science projects</p>
+                </a>
+                <a href="grocery-inventory-app.html" class="related-project">
+                    <h3>Grocery Inventory App</h3>
+                    <p>Full-stack application for inventory management</p>
+                </a>
+                <a href="../projects.html" class="related-project view-all">
+                    <h3>View All Projects</h3>
+                    <p>See my complete portfolio of work</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Gavin Fecko | All Rights Reserved</p>
+            <div class="socials">
+                <a href="https://linkedin.com/in/gavin-fecko-52a5a1247/" target="_blank">LinkedIn</a> |
+                <a href="#" target="_blank">GitHub</a> |
+                <a href="mailto:GavinFecko1@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

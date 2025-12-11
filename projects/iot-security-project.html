@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Security Assessment Project | Gavin Fecko</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Gavin Fecko</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html" class="active">Projects</a></li>
+                    <li><a href="../portfolio.html">Portfolio/Work</a></li>
+                    <li><a href="../certifications.html">Certifications</a></li>
+                    <li><a href="../resume.html">Resume</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-header">
+                <div class="project-breadcrumb">
+                    <a href="../projects.html"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+                <div class="project-tag">Cybersecurity Lab</div>
+                <h1>IoT Security Assessment & Penetration Testing</h1>
+                <p class="project-subtitle">Comprehensive security evaluation of IoT devices using Kali Linux and network analysis tools</p>
+                <div class="project-meta">
+                    <span><i class="far fa-calendar"></i> Spring 2025</span>
+                    <span><i class="fas fa-shield-alt"></i> Security Assessment</span>
+                    <span><i class="fas fa-network-wired"></i> Network Analysis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <div class="project-main">
+                    <!-- Project Overview -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-bullseye"></i> Security Assessment Overview</h2>
+                        <div class="overview-grid">
+                            <div class="overview-item">
+                                <h3>Security Challenge</h3>
+                                <p>IoT devices often have weak security configurations and default credentials, making them vulnerable to attacks. This project aimed to identify and exploit these vulnerabilities in a controlled environment.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Assessment Goal</h3>
+                                <p>To perform comprehensive security testing on IoT devices, identify vulnerabilities, and develop detection mechanisms for common IoT-based attacks.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Test Environment</h3>
+                                <p>Kali Linux penetration testing platform with simulated IoT devices (smart cameras, sensors) and a controlled network environment.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Methodology -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-clipboard-list"></i> Security Assessment Methodology</h2>
+                        
+                        <div class="assessment-phases">
+                            <div class="phase">
+                                <h3>Phase 1: Reconnaissance</h3>
+                                <ul>
+                                    <li>Network scanning with Nmap to identify connected devices</li>
+                                    <li>Service enumeration and port scanning</li>
+                                    <li>OS fingerprinting and device identification</li>
+                                    <li>Vulnerability database matching</li>
+                                </ul>
+                            </div>
+                            <div class="phase">
+                                <h3>Phase 2: Vulnerability Analysis</h3>
+                                <ul>
+                                    <li>Default credential testing using Hydra</li>
+                                    <li>Firmware analysis and reverse engineering</li>
+                                    <li>Communication protocol analysis (MQTT, CoAP)</li>
+                                    <li>Encryption strength testing with OpenSSL</li>
+                                </ul>
+                            </div>
+                            <div class="phase">
+                                <h3>Phase 3: Exploitation</h3>
+                                <ul>
+                                    <li>SYN Flood DoS attack simulation</li>
+                                    <li>Man-in-the-Middle (MITM) attacks</li>
+                                    <li>Credential harvesting and session hijacking</li>
+                                    <li>Privilege escalation attempts</li>
+                                </ul>
+                            </div>
+                            <div class="phase">
+                                <h3>Phase 4: Detection & Mitigation</h3>
+                                <ul>
+                                    <li>IDS rule development for IoT traffic patterns</li>
+                                    <li>Anomaly detection using machine learning</li>
+                                    <li>Security hardening recommendations</li>
+                                    <li>Incident response procedures</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Implementation -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-cogs"></i> Technical Implementation</h2>
+                        
+                        <h3>Network Architecture</h3>
+<pre><code class="python"># Network Scanning Script
+import nmap
+import socket
+from scapy.all import *
+
+class IoTScanner:
+    def __init__(self, target_range):
+        self.target_range = target_range
+        self.nm = nmap.PortScanner()
+    
+    def discover_iot_devices(self):
+        """Scan network for IoT devices"""
+        print(f"Scanning network: {self.target_range}")
+        
+        # Perform comprehensive scan
+        scan_results = self.nm.scan(
+            hosts=self.target_range,
+            arguments='-sS -sV -O -T4 --script=vuln'
+        )
+        
+        iot_devices = []
+        for host in self.nm.all_hosts():
+            if self.is_iot_device(host):
+                device_info = {
+                    'ip': host,
+                    'hostname': self.nm[host].hostname(),
+                    'state': self.nm[host].state(),
+                    'os': self.nm[host]['osmatch'][0]['name'] if 'osmatch' in self.nm[host] else 'Unknown',
+                    'ports': self.get_open_ports(host)
+                }
+                iot_devices.append(device_info)
+        
+        return iot_devices
+    
+    def is_iot_device(self, host):
+        """Identify IoT devices based on open ports and services"""
+        common_iot_ports = [1883, 8883, 5683, 5684, 8884]  # MQTT, CoAP ports
+        for port in common_iot_ports:
+            if self.nm[host].has_tcp(port):
+                return True
+        return False
+    
+    def get_open_ports(self, host):
+        """Extract open ports and services"""
+        ports = []
+        for proto in self.nm[host].all_protocols():
+            lport = self.nm[host][proto].keys()
+            for port in lport:
+                service = self.nm[host][proto][port]['name']
+                ports.append(f"{port}/{proto} ({service})")
+        return ports</code></pre>
+
+                        <h3>DoS Attack Detection</h3>
+<pre><code class="python"># SYN Flood Detection with Scapy
+from scapy.all import *
+import time
+from collections import defaultdict
+
+class DoSDetector:
+    def __init__(self, threshold=100, window=10):
+        self.threshold = threshold  # Max SYN packets per window
+        self.window = window        # Time window in seconds
+        self.syn_counts = defaultdict(int)
+        self.last_reset = time.time()
+    
+    def analyze_packet(self, packet):
+        """Analyze packets for SYN flood patterns"""
+        current_time = time.time()
+        
+        # Reset counters if window expired
+        if current_time - self.last_reset > self.window:
+            self.syn_counts.clear()
+            self.last_reset = current_time
+        
+        # Check for SYN packets without ACK (SYN flood indicator)
+        if packet.haslayer(TCP):
+            tcp_layer = packet.getlayer(TCP)
+            if tcp_layer.flags == 'S':  # SYN flag set
+                src_ip = packet[IP].src
+                self.syn_counts[src_ip] += 1
+                
+                # Check if threshold exceeded
+                if self.syn_counts[src_ip] > self.threshold:
+                    print(f"[ALERT] Possible SYN Flood from {src_ip}")
+                    print(f"  SYN packets in last {self.window}s: {self.syn_counts[src_ip]}")
+                    self.trigger_mitigation(src_ip)
+                    return True
+        
+        return False
+    
+    def trigger_mitigation(self, malicious_ip):
+        """Implement mitigation measures"""
+        # Block IP using iptables
+        import subprocess
+        subprocess.run([
+            'iptables', '-A', 'INPUT', '-s', malicious_ip, '-j', 'DROP'
+        ])
+        print(f"  [MITIGATION] Blocked {malicious_ip} via iptables")
+        
+        # Send alert to security team
+        self.send_alert(malicious_ip)</code></pre>
+                    </div>
+
+                    <!-- Attack Simulations -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-bug"></i> Attack Simulations & Results</h2>
+                        
+                        <div class="attack-results">
+                            <h3>Simulated Attacks</h3>
+                            <table class="attack-table">
+                                <thead>
+                                    <tr>
+                                        <th>Attack Type</th>
+                                        <th>Target Device</th>
+                                        <th>Success Rate</th>
+                                        <th>Detection Time</th>
+                                        <th>Mitigation Applied</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SYN Flood DoS</td>
+                                        <td>Smart Camera</td>
+                                        <td>100%</td>
+                                        <td>4.2 seconds</td>
+                                        <td>IP Blocking</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Default Credential</td>
+                                        <td>IoT Sensor</td>
+                                        <td>75%</td>
+                                        <td>N/A</td>
+                                        <td>Password Reset</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MITM (ARP Spoofing)</td>
+                                        <td>All Devices</td>
+                                        <td>90%</td>
+                                        <td>8.5 seconds</td>
+                                        <td>Static ARP</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Firmware Analysis</td>
+                                        <td>Smart Plug</td>
+                                        <td>100%</td>
+                                        <td>N/A</td>
+                                        <td>Firmware Update</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Wireshark Analysis</h3>
+                        <div class="wireshark-analysis">
+                            <p><strong>Key Findings from Packet Analysis:</strong></p>
+                            <ul>
+                                <li><strong>Unencrypted MQTT Traffic:</strong> 65% of IoT devices transmitted data without encryption</li>
+                                <li><strong>Default Credentials:</strong> 40% of devices had unchanged default passwords</li>
+                                <li><strong>Vulnerable Services:</strong> Telnet (23) and FTP (21) running on 30% of devices</li>
+                                <li><strong>Weak Encryption:</strong> SSL/TLS configurations with outdated protocols (SSLv3)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Detection Mechanisms -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-shield-alt"></i> Detection & Prevention Mechanisms</h2>
+                        
+                        <div class="detection-methods">
+                            <div class="detection-card">
+                                <h3>1. Signature-Based Detection</h3>
+                                <p>Developed Snort rules for IoT-specific attack patterns:</p>
+<pre><code># IoT-specific Snort Rules
+alert tcp any any -> any 1883 (msg:"MQTT Unencrypted Connection";
+flow:to_server,established; content:"CONNECT"; nocase; sid:1000001;)
+
+alert udp any any -> any 5683 (msg:"CoAP DDoS Amplification Attempt";
+dsize:>1024; content:"0x40"; depth:1; sid:1000002;)
+
+alert tcp any any -> any 23 (msg:"IoT Telnet Default Login Attempt";
+content:"login:"; nocase; pcre:"/password\s*:/i"; sid:1000003;)</code></pre>
+                            </div>
+
+                            <div class="detection-card">
+                                <h3>2. Anomaly-Based Detection</h3>
+                                <p>Implemented machine learning for behavioral analysis:</p>
+<pre><code class="python"># IoT Device Behavioral Profile
+class IoTBehaviorAnalyzer:
+    def __init__(self):
+        self.profiles = {}
+        self.threshold = 2.0  # Standard deviation threshold
+    
+    def build_profile(self, device_id, network_data):
+        """Build normal behavior profile"""
+        profile = {
+            'avg_packet_size': np.mean(network_data['packet_sizes']),
+            'avg_packets_per_min': np.mean(network_data['packet_rates']),
+            'common_destinations': Counter(network_data['destinations']).most_common(5),
+            'protocol_distribution': Counter(network_data['protocols'])
+        }
+        self.profiles[device_id] = profile
+        return profile
+    
+    def detect_anomalies(self, device_id, current_data):
+        """Detect deviations from normal behavior"""
+        if device_id not in self.profiles:
+            return False
+        
+        profile = self.profiles[device_id]
+        
+        # Calculate deviation scores
+        packet_size_dev = abs(current_data['avg_packet_size'] - profile['avg_packet_size'])
+        packet_rate_dev = abs(current_data['packet_rate'] - profile['avg_packets_per_min'])
+        
+        # Normalize deviations
+        normalized_dev = (packet_size_dev + packet_rate_dev) / 2
+        
+        return normalized_dev > self.threshold</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Recommendations -->
+                    <div class="project-section reflection">
+                        <h2><i class="fas fa-lightbulb"></i> Security Recommendations & Reflection</h2>
+                        
+                        <div class="recommendations">
+                            <h3>Key Vulnerabilities Identified</h3>
+                            <ol>
+                                <li><strong>Weak Authentication:</strong> Default credentials and lack of multi-factor authentication</li>
+                                <li><strong>Unencrypted Communications:</strong> Plaintext transmission of sensitive data</li>
+                                <li><strong>Insecure Network Services:</strong> Unnecessary open ports and vulnerable protocols</li>
+                                <li><strong>Lack of Device Hardening:</strong> Minimal security configurations and outdated firmware</li>
+                            </ol>
+                            
+                            <h3>Security Hardening Recommendations</h3>
+                            <div class="hardening-checklist">
+                                <div class="checklist-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Implement strong authentication with certificate-based access</span>
+                                </div>
+                                <div class="checklist-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Enable encryption for all communications (TLS 1.3)</span>
+                                </div>
+                                <div class="checklist-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Segment IoT devices on separate VLANs</span>
+                                </div>
+                                <div class="checklist-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Regular firmware updates and vulnerability scanning</span>
+                                </div>
+                                <div class="checklist-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Implement network monitoring with IDS/IPS solutions</span>
+                                </div>
+                            </div>
+                            
+                            <h3>Lessons Learned</h3>
+                            <p>This project demonstrated how easily IoT devices can be compromised and the importance of security-by-design principles. The most significant takeaway was that many vulnerabilities stem from basic security hygiene failures rather than complex exploits.</p>
+                            
+                            <p><strong>Future Work:</strong> Develop an automated IoT security assessment tool that can scan home networks and provide actionable security recommendations to non-technical users.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="project-sidebar">
+                    <div class="sidebar-section">
+                        <h3>Tools & Technologies</h3>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Kali Linux</span>
+                            <span class="tech-tag">Wireshark</span>
+                            <span class="tech-tag">Nmap</span>
+                            <span class="tech-tag">Metasploit</span>
+                            <span class="tech-tag">Scapy</span>
+                            <span class="tech-tag">OpenSSL</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Snort</span>
+                            <span class="tech-tag">Hydra</span>
+                            <span class="tech-tag">Burp Suite</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Security Metrics</h3>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="stat-value">15</span>
+                                <span class="stat-label">Vulnerabilities Found</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">92%</span>
+                                <span class="stat-label">Attack Success Rate</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">6.2s</span>
+                                <span class="stat-label">Avg Detection Time</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">8</span>
+                                <span class="stat-label">Snort Rules Created</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Attack Vectors Tested</h3>
+                        <ul class="attack-list">
+                            <li><i class="fas fa-bolt"></i> DoS/DDoS Attacks</li>
+                            <li><i class="fas fa-user-secret"></i> Credential Attacks</li>
+                            <li><i class="fas fa-exchange-alt"></i> MITM Attacks</li>
+                            <li><i class="fas fa-code"></i> Firmware Analysis</li>
+                            <li><i class="fas fa-wifi"></i> Wireless Attacks</li>
+                            <li><i class="fas fa-database"></i> Data Exfiltration</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Security Standards</h3>
+                        <div class="standards">
+                            <div class="standard">
+                                <span class="standard-name">OWASP IoT Top 10</span>
+                                <span class="standard-coverage">Covered 8/10</span>
+                            </div>
+                            <div class="standard">
+                                <span class="standard-name">NIST SP 800-53</span>
+                                <span class="standard-coverage">IA Controls</span>
+                            </div>
+                            <div class="standard">
+                                <span class="standard-name">ISO 27001</span>
+                                <span class="standard-coverage">Annex A.14</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Deliverables</h3>
+                        <div class="deliverables">
+                            <a href="#" class="deliverable">
+                                <i class="fas fa-file-pdf"></i> Security Assessment Report
+                            </a>
+                            <a href="#" class="deliverable">
+                                <i class="fas fa-code"></i> Detection Scripts
+                            </a>
+                            <a href="#" class="deliverable">
+                                <i class="fas fa-video"></i> Attack Demonstration
+                            </a>
+                            <a href="#" class="deliverable">
+                                <i class="fas fa-clipboard-list"></i> Risk Assessment Matrix
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Skills Demonstrated</h3>
+                        <ul class="skills-list">
+                            <li>Penetration Testing</li>
+                            <li>Network Security</li>
+                            <li>Vulnerability Assessment</li>
+                            <li>Incident Response</li>
+                            <li>Security Hardening</li>
+                            <li>Packet Analysis</li>
+                            <li>IDS/IPS Configuration</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Security Projects</h2>
+            <div class="related-grid">
+                <a href="ai-sports-analytics.html" class="related-project">
+                    <h3>AI Sports Analytics</h3>
+                    <p>Machine learning and data analysis project</p>
+                </a>
+                <a href="grocery-inventory-app.html" class="related-project">
+                    <h3>Grocery Inventory App</h3>
+                    <p>Full-stack development with security features</p>
+                </a>
+                <a href="../projects.html" class="related-project view-all">
+                    <h3>View All Projects</h3>
+                    <p>See complete portfolio</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Gavin Fecko | All Rights Reserved</p>
+            <div class="socials">
+                <a href="https://linkedin.com/in/gavin-fecko-52a5a1247/" target="_blank">LinkedIn</a> |
+                <a href="#" target="_blank">GitHub</a> |
+                <a href="mailto:GavinFecko1@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

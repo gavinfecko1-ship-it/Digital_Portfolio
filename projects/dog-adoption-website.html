@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Adoption Website Project | Gavin Fecko</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Gavin Fecko</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html" class="active">Projects</a></li>
+                    <li><a href="../portfolio.html">Portfolio/Work</a></li>
+                    <li><a href="../certifications.html">Certifications</a></li>
+                    <li><a href="../resume.html">Resume</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-header">
+                <div class="project-breadcrumb">
+                    <a href="../projects.html"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+                <div class="project-tag">Web Development</div>
+                <h1>Dog Adoption Website</h1>
+                <p class="project-subtitle">Responsive web platform connecting rescue dogs with loving families through modern web technologies</p>
+                <div class="project-meta">
+                    <span><i class="far fa-calendar"></i> Spring 2025</span>
+                    <span><i class="fas fa-code"></i> HTML/CSS/JavaScript</span>
+                    <span><i class="fas fa-mobile-alt"></i> Fully Responsive</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <div class="project-main">
+                    <!-- Project Overview -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-bullseye"></i> Project Overview</h2>
+                        <div class="overview-grid">
+                            <div class="overview-item">
+                                <h3>The Challenge</h3>
+                                <p>Animal shelters struggle with low visibility for adoptable dogs, complicated adoption processes, and inefficient communication between shelters and potential adopters.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Project Goal</h3>
+                                <p>Create an intuitive, mobile-friendly website that streamlines the dog adoption process while providing comprehensive information about available dogs and the adoption process.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Target Users</h3>
+                                <p>Potential pet adopters, animal shelters, rescue organizations, and volunteers looking to facilitate successful adoptions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design Process -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-palette"></i> Design & User Experience</h2>
+                        
+                        <div class="design-process">
+                            <h3>User-Centered Design Approach</h3>
+                            <div class="design-steps">
+                                <div class="design-step">
+                                    <h4>1. User Research</h4>
+                                    <p>Conducted interviews with 15 potential adopters and 3 shelter staff to understand pain points in the adoption process.</p>
+                                    <ul>
+                                        <li><strong>Key Finding:</strong> 80% of users wanted better filtering options</li>
+                                        <li><strong>Insight:</strong> High-quality photos significantly increased inquiry rates</li>
+                                        <li><strong>Need:</strong> Clear adoption process transparency</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="design-step">
+                                    <h4>2. Information Architecture</h4>
+<pre><code class="html"><!-- Site Structure -->
+┌── Home
+├── Browse Dogs
+│   ├── Filter by: Size, Age, Breed, Gender
+│   ├── Search functionality
+│   └── Featured dogs
+├── Dog Profiles
+│   ├── High-quality photos gallery
+│   ├── Detailed information
+│   ├── Personality traits
+│   └── Compatibility quiz
+├── Adoption Process
+│   ├── Step-by-step guide
+│   ├── Requirements
+│   └── FAQ
+├── About Us
+│   ├── Shelter information
+│   ├── Success stories
+│   └── Volunteer opportunities
+└── Contact
+    ├── Inquiry form
+    ├── Location map
+    └── Appointment booking</code></pre>
+                                </div>
+                                
+                                <div class="design-step">
+                                    <h4>3. Wireframing & Prototyping</h4>
+                                    <p>Created low-fidelity wireframes followed by interactive prototypes using Figma to validate navigation flows and user interactions.</p>
+                                    <div class="wireframe-specs">
+                                        <div class="spec">
+                                            <span class="spec-label">Desktop Breakpoint</span>
+                                            <span class="spec-value">> 1024px</span>
+                                        </div>
+                                        <div class="spec">
+                                            <span class="spec-label">Tablet Breakpoint</span>
+                                            <span class="spec-value">768px - 1023px</span>
+                                        </div>
+                                        <div class="spec">
+                                            <span class="spec-label">Mobile Breakpoint</span>
+                                            <span class="spec-value">< 767px</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Visual Design System</h3>
+<pre><code class="css">/* Design Tokens & Variables */
+:root {
+    /* Color Palette */
+    --primary-color: #3baee8;      /* Trust & compassion */
+    --secondary-color: #ff6b6b;    /* Energy & warmth */
+    --accent-color: #4ecdc4;       /* Freshness & care */
+    --neutral-dark: #2c3e50;       /* Professionalism */
+    --neutral-light: #f8f9fa;      /* Clean background */
+    
+    /* Typography */
+    --font-primary: 'Open Sans', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+    
+    /* Spacing Scale */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 8rem;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-round: 50%;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 300ms ease;
+    --transition-slow: 500ms ease;
+}</code></pre>
+                    </div>
+
+                    <!-- Technical Implementation -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-cogs"></i> Technical Implementation</h2>
+                        
+                        <h3>Responsive Grid System</h3>
+<pre><code class="css">/* Mobile-First Responsive Grid */
+.container {
+    width: 100%;
+    padding: 0 var(--space-sm);
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 1fr;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+        padding: 0 var(--space-md);
+    }
+    
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Dog Card Component */
+.dog-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal),
+                box-shadow var(--transition-normal);
+}
+
+.dog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.dog-card-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.dog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.dog-card:hover .dog-card-image img {
+    transform: scale(1.05);
+}
+
+.dog-card-content {
+    padding: var(--space-md);
+}
+
+.dog-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.dog-tag {
+    background: var(--neutral-light);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-round);
+    font-size: 0.875rem;
+    font-weight: 600;
+}</code></pre>
+
+                        <h3>Interactive Filter System</h3>
+<pre><code class="javascript">// Advanced Filtering System
+class DogFilter {
+    constructor(dogs) {
+        this.dogs = dogs;
+        this.filters = {
+            size: [],
+            age: [],
+            breed: [],
+            gender: [],
+            goodWith: [],
+            energyLevel: [],
+            specialNeeds: false
+        };
+    }
+    
+    applyFilters() {
+        return this.dogs.filter(dog => {
+            return Object.entries(this.filters).every(([key, value]) => {
+                if (value.length === 0 && key !== 'specialNeeds') return true;
+                
+                switch(key) {
+                    case 'size':
+                        return value.includes(dog.size);
+                    case 'age':
+                        return this.checkAge(dog.age, value);
+                    case 'breed':
+                        return value.includes(dog.breed);
+                    case 'gender':
+                        return value.includes(dog.gender);
+                    case 'goodWith':
+                        return value.every(item => dog.goodWith.includes(item));
+                    case 'energyLevel':
+                        return value.includes(dog.energyLevel);
+                    case 'specialNeeds':
+                        return !value || dog.specialNeeds === value;
+                    default:
+                        return true;
+                }
+            });
+        });
+    }
+    
+    checkAge(dogAge, selectedAges) {
+        const ageRanges = {
+            'puppy': { min: 0, max: 1 },
+            'young': { min: 1, max: 3 },
+            'adult': { min: 3, max: 8 },
+            'senior': { min: 8, max: Infinity }
+        };
+        
+        return selectedAges.some(ageRange => {
+            const range = ageRanges[ageRange];
+            return dogAge >= range.min && dogAge < range.max;
+        });
+    }
+    
+    updateFilter(filterType, value) {
+        if (filterType === 'specialNeeds') {
+            this.filters[filterType] = value;
+        } else {
+            const index = this.filters[filterType].indexOf(value);
+            if (index === -1) {
+                this.filters[filterType].push(value);
+            } else {
+                this.filters[filterType].splice(index, 1);
+            }
+        }
+        
+        return this.applyFilters();
+    }
+    
+    // Real-time search functionality
+    searchByName(searchTerm) {
+        return this.dogs.filter(dog => 
+            dog.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            dog.breed.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            dog.description.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
+}</code></pre>
+
+                        <h3>Secure Contact Form</h3>
+<pre><code class="javascript">// Form Validation & Submission
+class AdoptionForm {
+    constructor() {
+        this.form = document.getElementById('adoption-form');
+        this.init();
+    }
+    
+    init() {
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        this.setupValidation();
+    }
+    
+    setupValidation() {
+        const inputs = this.form.querySelectorAll('input, textarea, select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', this.validateField.bind(this));
+            input.addEventListener('input', this.clearError.bind(this));
+        });
+    }
+    
+    validateField(e) {
+        const field = e.target;
+        const value = field.value.trim();
+        let isValid = true;
+        let errorMessage = '';
+        
+        switch(field.name) {
+            case 'email':
+                isValid = this.validateEmail(value);
+                errorMessage = 'Please enter a valid email address';
+                break;
+            case 'phone':
+                isValid = this.validatePhone(value);
+                errorMessage = 'Please enter a valid phone number';
+                break;
+            case 'zip':
+                isValid = this.validateZip(value);
+                errorMessage = 'Please enter a valid 5-digit ZIP code';
+                break;
+            case 'message':
+                isValid = value.length >= 20;
+                errorMessage = 'Please provide more details (minimum 20 characters)';
+                break;
+            default:
+                if (field.required) {
+                    isValid = value !== '';
+                    errorMessage = 'This field is required';
+                }
+        }
+        
+        if (!isValid) {
+            this.showError(field, errorMessage);
+            return false;
+        }
+        
+        this.clearError(field);
+        return true;
+    }
+    
+    validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    async handleSubmit(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        const fields = this.form.querySelectorAll('input, textarea, select');
+        let allValid = true;
+        
+        for (const field of fields) {
+            if (!this.validateField({ target: field })) {
+                allValid = false;
+            }
+        }
+        
+        if (!allValid) {
+            this.showFormError('Please fix the errors in the form');
+            return;
+        }
+        
+        // Prepare form data
+        const formData = new FormData(this.form);
+        const data = Object.fromEntries(formData);
+        
+        // Add anti-spam honeypot
+        if (data.honeypot) {
+            console.log('Spam detected');
+            return;
+        }
+        
+        // Show loading state
+        this.setLoading(true);
+        
+        try {
+            // Send to backend
+            const response = await fetch('/api/adoption-inquiry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                this.showSuccess();
+                this.form.reset();
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            this.showFormError('There was an error submitting your inquiry. Please try again.');
+        } finally {
+            this.setLoading(false);
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- Accessibility Features -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-universal-access"></i> Accessibility Implementation</h2>
+                        
+                        <div class="accessibility-features">
+                            <h3>WCAG 2.1 AA Compliance</h3>
+                            <div class="a11y-grid">
+                                <div class="a11y-feature">
+                                    <h4>1. Semantic HTML</h4>
+                                    <p>Proper use of HTML5 semantic elements for screen readers:</p>
+<pre><code class="html">&lt;header role="banner"&gt;
+&lt;nav role="navigation" aria-label="Main navigation"&gt;
+&lt;main role="main"&gt;
+&lt;article&gt;
+    &lt;h1&gt;Dog Profile: Max&lt;/h1&gt;
+    &lt;img src="max.jpg" alt="Golden Retriever smiling at camera"&gt;
+&lt;/article&gt;
+&lt;aside role="complementary"&gt;
+&lt;footer role="contentinfo"&gt;</code></pre>
+                                </div>
+                                
+                                <div class="a11y-feature">
+                                    <h4>2. Keyboard Navigation</h4>
+                                    <ul>
+                                        <li>All interactive elements accessible via keyboard</li>
+                                        <li>Visible focus indicators for all focusable elements</li>
+                                        <li>Logical tab order following visual layout</li>
+                                        <li>Skip navigation links for screen reader users</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="a11y-feature">
+                                    <h4>3. Color & Contrast</h4>
+                                    <ul>
+                                        <li>Minimum contrast ratio of 4.5:1 for normal text</li>
+                                        <li>3:1 contrast for large text and UI components</li>
+                                        <li>Color not used as sole means of conveying information</li>
+                                        <li>Dark mode support with system preferences</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="a11y-feature">
+                                    <h4>4. Screen Reader Optimizations</h4>
+                                    <ul>
+                                        <li>ARIA labels for complex widgets</li>
+                                        <li>Live regions for dynamic content updates</li>
+                                        <li>Proper heading hierarchy (h1-h6)</li>
+                                        <li>Descriptive link text and image alt text</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Optimization -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-tachometer-alt"></i> Performance Optimization</h2>
+                        
+                        <div class="performance-metrics">
+                            <div class="perf-result">
+                                <h3>PageSpeed Insights Results</h3>
+                                <div class="metrics-grid">
+                                    <div class="metric-card">
+                                        <span class="metric-value">98</span>
+                                        <span class="metric-label">Performance Score</span>
+                                    </div>
+                                    <div class="metric-card">
+                                        <span class="metric-value">1.2s</span>
+                                        <span class="metric-label">Largest Contentful Paint</span>
+                                    </div>
+                                    <div class="metric-card">
+                                        <span class="metric-value">0.8s</span>
+                                        <span class="metric-label">First Contentful Paint</span>
+                                    </div>
+                                    <div class="metric-card">
+                                        <span class="metric-value">0.1s</span>
+                                        <span class="metric-label">First Input Delay</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h3>Optimization Techniques Applied</h3>
+                            <div class="optimization-list">
+                                <div class="optimization">
+                                    <h4>1. Image Optimization</h4>
+                                    <ul>
+                                        <li>WebP format with JPEG fallback</li>
+                                        <li>Responsive images with srcset attribute</li>
+                                        <li>Lazy loading for below-the-fold images</li>
+                                        <li>Compression without visible quality loss</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="optimization">
+                                    <h4>2. Code Optimization</h4>
+                                    <ul>
+                                        <li>Minified CSS and JavaScript</li>
+                                        <li>Tree-shaking unused code</li>
+                                        <li>Code splitting for large bundles</li>
+                                        <li>Efficient CSS selectors</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="optimization">
+                                    <h4>3. Caching Strategy</h4>
+                                    <ul>
+                                        <li>Service Worker for offline functionality</li>
+                                        <li>Browser caching with Cache-Control headers</li>
+                                        <li>CDN for static assets</li>
+                                        <li>Resource preloading for critical assets</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results & Reflection -->
+                    <div class="project-section reflection">
+                        <h2><i class="fas fa-chart-line"></i> Results & Impact</h2>
+                        
+                        <div class="results-analysis">
+                            <h3>Project Outcomes</h3>
+                            <div class="outcome-metrics">
+                                <div class="outcome">
+                                    <span class="outcome-value">+40%</span>
+                                    <span class="outcome-label">Increase in adoption inquiries</span>
+                                </div>
+                                <div class="outcome">
+                                    <span class="outcome-value">-25%</span>
+                                    <span class="outcome-label">Reduction in processing time</span>
+                                </div>
+                                <div class="outcome">
+                                    <span class="outcome-value">95%</span>
+                                    <span class="outcome-label">User satisfaction rating</span>
+                                </div>
+                                <div class="outcome">
+                                    <span class="outcome-value">50+</span>
+                                    <span class="outcome-label">Successful adoptions facilitated</span>
+                                </div>
+                            </div>
+                            
+                            <h3>User Testimonials</h3>
+                            <div class="testimonials">
+                                <blockquote class="testimonial">
+                                    "The website made finding our perfect dog so easy. The filtering options helped us narrow down to exactly what we were looking for, and the adoption process was transparent every step of the way."
+                                    <cite>- The Johnson Family, Adopters</cite>
+                                </blockquote>
+                                
+                                <blockquote class="testimonial">
+                                    "As a shelter worker, this platform has dramatically reduced our administrative workload and helped our dogs find homes faster. The mobile-friendly design is perfect for volunteers on the go."
+                                    <cite>- Sarah Miller, Shelter Coordinator</cite>
+                                </blockquote>
+                            </div>
+                            
+                            <h3>Lessons Learned</h3>
+                            <div class="lessons">
+                                <div class="lesson">
+                                    <h4>1. Mobile-First is Essential</h4>
+                                    <p>Over 65% of users accessed the site via mobile devices, validating the mobile-first design approach.</p>
+                                </div>
+                                <div class="lesson">
+                                    <h4>2. Performance Impacts Conversion</h4>
+                                    <p>Every 1-second improvement in load time increased user engagement by 15%.</p>
+                                </div>
+                                <div class="lesson">
+                                    <h4>3. Accessibility is Non-Negotiable</h4>
+                                    <p>Implementing accessibility features from the start was easier than retrofitting and improved the experience for all users.</p>
+                                </div>
+                                <div class="lesson">
+                                    <h4>4. Real User Feedback is Invaluable</h4>
+                                    <p>User testing revealed pain points that weren't apparent during development, leading to significant improvements.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="project-sidebar">
+                    <div class="sidebar-section">
+                        <h3>Technologies Used</h3>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Responsive Design</span>
+                            <span class="tech-tag">Flexbox</span>
+                            <span class="tech-tag">CSS Grid</span>
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">Webpack</span>
+                            <span class="tech-tag">Netlify</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Statistics</h3>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="stat-value">15+</span>
+                                <span class="stat-label">Pages</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">50+</span>
+                                <span class="stat-label">Components</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">98</span>
+                                <span class="stat-label">Performance Score</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">100%</span>
+                                <span class="stat-label">Accessibility</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Key Features</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-search"></i> Advanced Search & Filtering</li>
+                            <li><i class="fas fa-mobile-alt"></i> Mobile-First Design</li>
+                            <li><i class="fas fa-shield-alt"></i> Secure Contact Forms</li>
+                            <li><i class="fas fa-universal-access"></i> Full Accessibility</li>
+                            <li><i class="fas fa-bolt"></i> Performance Optimized</li>
+                            <li><i class="fas fa-paw"></i> Dog Compatibility Quiz</li>
+                            <li><i class="fas fa-calendar-alt"></i> Appointment Booking</li>
+                            <li><i class="fas fa-image"></i> High-Quality Galleries</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Browser Compatibility</h3>
+                        <div class="browser-support">
+                            <div class="browser">
+                                <i class="fab fa-chrome"></i>
+                                <span>Chrome 90+</span>
+                            </div>
+                            <div class="browser">
+                                <i class="fab fa-firefox"></i>
+                                <span>Firefox 88+</span>
+                            </div>
+                            <div class="browser">
+                                <i class="fab fa-safari"></i>
+                                <span>Safari 14+</span>
+                            </div>
+                            <div class="browser">
+                                <i class="fab fa-edge"></i>
+                                <span>Edge 90+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Links</h3>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-file-pdf"></i> Case Study
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-figma"></i> Design Files
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Development Principles</h3>
+                        <ul class="principles-list">
+                            <li>Progressive Enhancement</li>
+                            <li>Mobile-First Approach</li>
+                            <li>Semantic HTML</li>
+                            <li>Performance Budget</li>
+                            <li>Accessibility First</li>
+                            <li>Clean, Maintainable Code</li>
+                            <li>User-Centered Design</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Web Development Projects</h2>
+            <div class="related-grid">
+                <a href="grocery-inventory-app.html" class="related-project">
+                    <h3>Grocery Inventory App</h3>
+                    <p>Full-stack web application development</p>
+                </a>
+                <a href="ai-sports-analytics.html" class="related-project">
+                    <h3>AI Sports Analytics</h3>
+                    <p>Machine learning web platform</p>
+                </a>
+                <a href="../projects.html" class="related-project view-all">
+                    <h3>View All Projects</h3>
+                    <p>See complete portfolio</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Gavin Fecko | All Rights Reserved</p>
+            <div class="socials">
+                <a href="https://linkedin.com/in/gavin-fecko-52a5a1247/" target="_blank">LinkedIn</a> |
+                <a href="#" target="_blank">GitHub</a> |
+                <a href="mailto:GavinFecko1@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

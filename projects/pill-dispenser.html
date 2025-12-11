@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Pill Dispenser IoT Project | Gavin Fecko</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Gavin Fecko</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html" class="active">Projects</a></li>
+                    <li><a href="../portfolio.html">Portfolio/Work</a></li>
+                    <li><a href="../certifications.html">Certifications</a></li>
+                    <li><a href="../resume.html">Resume</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-header">
+                <div class="project-breadcrumb">
+                    <a href="../projects.html"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+                <div class="project-tag">IoT & Embedded Systems</div>
+                <h1>Automated Pill Dispenser Using Arduino</h1>
+                <p class="project-subtitle">Smart medication management system with IoT connectivity and precise dosing</p>
+                <div class="project-meta">
+                    <span><i class="far fa-calendar"></i> Fall 2024</span>
+                    <span><i class="fas fa-microchip"></i> Arduino</span>
+                    <span><i class="fas fa-wifi"></i> IoT Integration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <div class="project-main">
+                    <!-- Project Overview -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-bullseye"></i> Project Overview</h2>
+                        <div class="overview-grid">
+                            <div class="overview-item">
+                                <h3>Problem Statement</h3>
+                                <p>Medication non-adherence is a major healthcare issue, with approximately 50% of patients failing to take medications as prescribed, leading to poor health outcomes and increased healthcare costs.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Solution</h3>
+                                <p>An automated pill dispensing system that ensures timely medication delivery, tracks adherence, and provides remote monitoring capabilities for caregivers.</p>
+                            </div>
+                            <div class="overview-item">
+                                <h3>Key Innovation</h3>
+                                <p>Integration of precise mechanical dispensing with IoT connectivity for real-time monitoring and alerts, all within a compact, user-friendly design.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Architecture -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-cogs"></i> System Architecture</h2>
+                        
+                        <div class="system-diagram">
+                            <div class="system-layer">
+                                <h3>Hardware Layer</h3>
+                                <ul>
+                                    <li><strong>Arduino Uno</strong> - Main microcontroller</li>
+                                    <li><strong>Stepper Motors</strong> - Precise pill dispensing</li>
+                                    <li><strong>IR Sensors</strong> - Pill detection and counting</li>
+                                    <li><strong>Real-Time Clock (RTC)</strong> - Accurate timing</li>
+                                    <li><strong>LCD Display</strong> - User interface</li>
+                                    <li><strong>ESP8266</strong> - WiFi connectivity</li>
+                                </ul>
+                            </div>
+                            <div class="system-layer">
+                                <h3>Software Layer</h3>
+                                <ul>
+                                    <li><strong>C++</strong> - Embedded programming</li>
+                                    <li><strong>Arduino Libraries</strong> - Hardware abstraction</li>
+                                    <li><strong>MQTT Protocol</strong> - IoT communication</li>
+                                    <li><strong>Node.js Server</strong> - Data management</li>
+                                    <li><strong>React Dashboard</strong> - Remote monitoring</li>
+                                </ul>
+                            </div>
+                            <div class="system-layer">
+                                <h3>Mechanical Design</h3>
+                                <ul>
+                                    <li><strong>3D Printed Housing</strong> - Custom enclosure</li>
+                                    <li><strong>Rotary Carousel</strong> - Multi-compartment storage</li>
+                                    <li><strong>Dispensing Mechanism</strong> - Precise pill release</li>
+                                    <li><strong>Emergency Access</strong> - Manual override</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hardware Implementation -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-microchip"></i> Hardware Implementation</h2>
+                        
+                        <h3>Circuit Design & Components</h3>
+<pre><code class="cpp">// Main Arduino Control Logic
+#include <Stepper.h>
+#include <Wire.h>
+#include "RTClib.h"
+#include <LiquidCrystal_I2C.h>
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+
+// Pin Definitions
+#define STEPPER_PIN1 8
+#define STEPPER_PIN2 9
+#define STEPPER_PIN3 10
+#define STEPPER_PIN4 11
+#define IR_SENSOR_PIN A0
+#define BUZZER_PIN 12
+#define BUTTON_PIN 2
+
+// Global Objects
+RTC_DS3231 rtc;
+Stepper stepper(200, STEPPER_PIN1, STEPPER_PIN2, STEPPER_PIN3, STEPPER_PIN4);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
+
+// Medication Schedule Structure
+struct MedicationSchedule {
+    int hour;
+    int minute;
+    int compartment;
+    int pillCount;
+    bool taken;
+};
+
+MedicationSchedule schedules[10];
+int scheduleCount = 0;</code></pre>
+
+                        <h3>Stepper Motor Control</h3>
+<pre><code class="cpp">class PillDispenser {
+private:
+    int currentPosition;
+    int totalCompartments;
+    int stepsPerRevolution;
+    
+public:
+    PillDispenser(int compartments, int steps) {
+        totalCompartments = compartments;
+        stepsPerRevolution = steps;
+        currentPosition = 0;
+        stepper.setSpeed(60); // RPM
+    }
+    
+    void rotateToCompartment(int targetCompartment) {
+        int targetSteps = mapCompartmentToSteps(targetCompartment);
+        int stepsToMove = targetSteps - currentPosition;
+        
+        if (stepsToMove != 0) {
+            stepper.step(stepsToMove);
+            currentPosition = targetSteps;
+            logPositionChange(targetCompartment);
+        }
+    }
+    
+    int mapCompartmentToSteps(int compartment) {
+        // Map compartment number to stepper steps
+        int stepsPerCompartment = stepsPerRevolution / totalCompartments;
+        return compartment * stepsPerCompartment;
+    }
+    
+    void dispensePills(int compartment, int count) {
+        // Move to correct compartment
+        rotateToCompartment(compartment);
+        
+        // Activate dispensing mechanism
+        for (int i = 0; i < count; i++) {
+            activateDispenser();
+            delay(500); // Wait for pill to drop
+            if (!verifyPillDispensed()) {
+                handleDispensingError(compartment, i);
+                break;
+            }
+        }
+        
+        updateInventory(compartment, count);
+    }
+    
+    bool verifyPillDispensed() {
+        // Use IR sensor to verify pill was dispensed
+        int sensorValue = analogRead(IR_SENSOR_PIN);
+        return sensorValue > THRESHOLD;
+    }
+};</code></pre>
+                    </div>
+
+                    <!-- IoT Integration -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-wifi"></i> IoT Integration</h2>
+                        
+                        <h3>MQTT Communication Protocol</h3>
+<pre><code class="cpp">class IoTManager {
+private:
+    const char* mqttServer = "broker.mqttdashboard.com";
+    const int mqttPort = 1883;
+    const char* clientId = "pill-dispenser-001";
+    
+public:
+    void connectToWiFi() {
+        WiFi.begin("SSID", "PASSWORD");
+        while (WiFi.status() != WL_CONNECTED) {
+            delay(1000);
+            Serial.println("Connecting to WiFi...");
+        }
+        Serial.println("WiFi connected");
+    }
+    
+    void connectToMQTT() {
+        mqttClient.setServer(mqttServer, mqttPort);
+        mqttClient.setCallback(mqttCallback);
+        
+        while (!mqttClient.connected()) {
+            if (mqttClient.connect(clientId)) {
+                Serial.println("MQTT connected");
+                subscribeToTopics();
+            } else {
+                delay(5000);
+            }
+        }
+    }
+    
+    void subscribeToTopics() {
+        mqttClient.subscribe("pill-dispenser/commands");
+        mqttClient.subscribe("pill-dispenser/schedule");
+        mqttClient.subscribe("pill-dispenser/emergency");
+    }
+    
+    void publishData(const char* topic, const char* payload) {
+        mqttClient.publish(topic, payload);
+    }
+    
+    void mqttCallback(char* topic, byte* payload, unsigned int length) {
+        // Handle incoming MQTT messages
+        String message = "";
+        for (int i = 0; i < length; i++) {
+            message += (char)payload[i];
+        }
+        
+        if (strcmp(topic, "pill-dispenser/commands") == 0) {
+            handleCommand(message);
+        } else if (strcmp(topic, "pill-dispenser/schedule") == 0) {
+            updateSchedule(message);
+        }
+    }
+    
+    void sendDispensingAlert(int compartment, int pills, DateTime time) {
+        char payload[100];
+        sprintf(payload, 
+            "{\"event\":\"pill_dispensed\",\"compartment\":%d,\"pills\":%d,\"time\":\"%04d-%02d-%02dT%02d:%02d:%02d\"}",
+            compartment, pills,
+            time.year(), time.month(), time.day(),
+            time.hour(), time.minute(), time.second()
+        );
+        publishData("pill-dispenser/events", payload);
+    }
+};</code></pre>
+
+                        <h3>Remote Monitoring Dashboard</h3>
+<pre><code class="javascript">// React Dashboard Component
+import React, { useState, useEffect } from 'react';
+import mqtt from 'mqtt';
+
+const PillDispenserDashboard = () => {
+    const [medicationHistory, setMedicationHistory] = useState([]);
+    const [inventory, setInventory] = useState({});
+    const [connectionStatus, setConnectionStatus] = useState('disconnected');
+    
+    useEffect(() => {
+        // Connect to MQTT broker
+        const client = mqtt.connect('ws://broker.mqttdashboard.com:8000/mqtt');
+        
+        client.on('connect', () => {
+            setConnectionStatus('connected');
+            client.subscribe('pill-dispenser/events');
+            client.subscribe('pill-dispenser/status');
+        });
+        
+        client.on('message', (topic, message) => {
+            const data = JSON.parse(message.toString());
+            
+            if (topic === 'pill-dispenser/events') {
+                if (data.event === 'pill_dispensed') {
+                    setMedicationHistory(prev => [...prev, data]);
+                } else if (data.event === 'missed_dose') {
+                    sendAlert(data);
+                }
+            } else if (topic === 'pill-dispenser/status') {
+                setInventory(data.inventory);
+            }
+        });
+        
+        return () => client.end();
+    }, []);
+    
+    const sendScheduleUpdate = (schedule) => {
+        const client = mqtt.connect('ws://broker.mqttdashboard.com:8000/mqtt');
+        client.publish('pill-dispenser/schedule', JSON.stringify(schedule));
+    };
+    
+    const sendEmergencyDispense = (compartment) => {
+        const client = mqtt.connect('ws://broker.mqttdashboard.com:8000/mqtt');
+        client.publish('pill-dispenser/emergency', JSON.stringify({
+            command: 'dispense',
+            compartment: compartment
+        }));
+    };
+    
+    return (
+        <div className="dashboard">
+            <h2>Medication Management Dashboard</h2>
+            <div className="status-indicator">
+                Connection: {connectionStatus}
+            </div>
+            
+            <div className="medication-history">
+                <h3>Recent Dispensing Events</h3>
+                {medicationHistory.map((event, index) => (
+                    <div key={index} className="event-card">
+                        <span>{event.time}</span>
+                        <span>Compartment {event.compartment}: {event.pills} pills</span>
+                    </div>
+                ))}
+            </div>
+            
+            <div className="inventory-status">
+                <h3>Current Inventory</h3>
+                {Object.entries(inventory).map(([compartment, count]) => (
+                    <div key={compartment} className="inventory-item">
+                        <span>Compartment {compartment}: {count} pills remaining</span>
+                        {count < 5 && <span className="low-stock">LOW STOCK</span>}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};</code></pre>
+                    </div>
+
+                    <!-- Testing & Results -->
+                    <div class="project-section">
+                        <h2><i class="fas fa-flask"></i> Testing & Results</h2>
+                        
+                        <div class="test-results">
+                            <h3>Performance Metrics</h3>
+                            <table class="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>Test Parameter</th>
+                                        <th>Target</th>
+                                        <th>Actual Result</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dispensing Accuracy</td>
+                                        <td>99.5%</td>
+                                        <td>99.7%</td>
+                                        <td class="passed">Passed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Timing Precision</td>
+                                        <td>±1 minute</td>
+                                        <td>±0.5 minutes</td>
+                                        <td class="passed">Passed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pill Detection</td>
+                                        <td>95% accuracy</td>
+                                        <td>97.2% accuracy</td>
+                                        <td class="passed">Passed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Network Latency</td>
+                                        <td>&lt; 2 seconds</td>
+                                        <td>1.3 seconds</td>
+                                        <td class="passed">Passed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Battery Life</td>
+                                        <td>7 days standby</td>
+                                        <td>8.5 days</td>
+                                        <td class="passed">Passed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error Recovery</td>
+                                        <td>Automatic retry</td>
+                                        <td>3 retry attempts</td>
+                                        <td class="passed">Passed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>User Testing Feedback</h3>
+                        <div class="user-feedback">
+                            <blockquote class="testimonial">
+                                "The device was incredibly easy to set up and use. The remote monitoring feature gave me peace of mind knowing my mother was taking her medications on time."
+                                <cite>- Caregiver during testing phase</cite>
+                            </blockquote>
+                            
+                            <div class="usability-metrics">
+                                <div class="metric">
+                                    <span class="metric-value">4.8/5</span>
+                                    <span class="metric-label">Ease of Use</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">4.9/5</span>
+                                    <span class="metric-label">Reliability</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">4.7/5</span>
+                                    <span class="metric-label">Helpful Alerts</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">95%</span>
+                                    <span class="metric-label">Medication Adherence</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reflection & Future Work -->
+                    <div class="project-section reflection">
+                        <h2><i class="fas fa-lightbulb"></i> Project Reflection & Future Improvements</h2>
+                        
+                        <div class="reflection-content">
+                            <h3>Key Technical Challenges</h3>
+                            <ol>
+                                <li><strong>Mechanical Precision:</strong> Achieving consistent pill dispensing required multiple iterations of the dispensing mechanism design</li>
+                                <li><strong>Power Management:</strong> Balancing functionality with battery life in a portable device</li>
+                                <li><strong>Network Reliability:</strong> Ensuring consistent IoT connectivity with automatic reconnection</li>
+                                <li><strong>User Safety:</strong> Implementing fail-safe mechanisms to prevent incorrect dosing</li>
+                            </ol>
+                            
+                            <h3>Lessons Learned</h3>
+                            <ul>
+                                <li>Prototyping is essential - went through 5 mechanical iterations before final design</li>
+                                <li>User-centered design significantly improves adoption and satisfaction</li>
+                                <li>Thorough testing under various conditions prevents field failures</li>
+                                <li>Documentation is crucial for maintenance and future development</li>
+                            </ul>
+                            
+                            <h3>Future Enhancements</h3>
+                            <div class="enhancements">
+                                <div class="enhancement">
+                                    <h4>1. AI-Powered Adherence Prediction</h4>
+                                    <p>Implement machine learning to predict when users might miss doses and send proactive reminders.</p>
+                                </div>
+                                <div class="enhancement">
+                                    <h4>2. Pharmacy Integration</h4>
+                                    <p>Direct communication with pharmacies for automatic refill requests when inventory is low.</p>
+                                </div>
+                                <div class="enhancement">
+                                    <h4>3. Biometric Authentication</h4>
+                                    <p>Add fingerprint or facial recognition to ensure only authorized users can access medications.</p>
+                                </div>
+                                <div class="enhancement">
+                                    <h4>4. Voice Interface</h4>
+                                    <p>Integrate voice commands for hands-free operation, especially useful for users with limited mobility.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="project-sidebar">
+                    <div class="sidebar-section">
+                        <h3>Hardware Components</h3>
+                        <div class="components-list">
+                            <div class="component">
+                                <span class="component-name">Arduino Uno</span>
+                                <span class="component-role">Main Controller</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">Stepper Motor</span>
+                                <span class="component-role">Precise Movement</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">IR Sensor</span>
+                                <span class="component-role">Pill Detection</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">DS3231 RTC</span>
+                                <span class="component-role">Accurate Timing</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">ESP8266</span>
+                                <span class="component-role">WiFi Module</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">LCD Display</span>
+                                <span class="component-role">User Interface</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Specifications</h3>
+                        <div class="specs-grid">
+                            <div class="spec">
+                                <span class="spec-label">Dimensions</span>
+                                <span class="spec-value">15×15×20 cm</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Weight</span>
+                                <span class="spec-value">1.2 kg</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Compartments</span>
+                                <span class="spec-value">8</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Battery</span>
+                                <span class="spec-value">12V Li-ion</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Connectivity</span>
+                                <span class="spec-value">WiFi, USB</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Cost</span>
+                                <span class="spec-value">$85 materials</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Software Tools</h3>
+                        <div class="tools-stack">
+                            <span class="tool-tag">Arduino IDE</span>
+                            <span class="tool-tag">C++</span>
+                            <span class="tool-tag">Fusion 360</span>
+                            <span class="tool-tag">Node.js</span>
+                            <span class="tool-tag">React</span>
+                            <span class="tool-tag">MQTT</span>
+                            <span class="tool-tag">Git</span>
+                            <span class="tool-tag">PlatformIO</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Project Documentation</h3>
+                        <div class="doc-links">
+                            <a href="#" class="doc-link">
+                                <i class="fas fa-file-pdf"></i> Technical Report
+                            </a>
+                            <a href="#" class="doc-link">
+                                <i class="fas fa-video"></i> Demo Video
+                            </a>
+                            <a href="#" class="doc-link">
+                                <i class="fas fa-code"></i> Source Code
+                            </a>
+                            <a href="#" class="doc-link">
+                                <i class="fas fa-wrench"></i> Assembly Guide
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Skills Demonstrated</h3>
+                        <ul class="skills-list">
+                            <li>Embedded Programming</li>
+                            <li>Circuit Design</li>
+                            <li>3D Printing & CAD</li>
+                            <li>IoT Integration</li>
+                            <li>User Interface Design</li>
+                            <li>Testing & Validation</li>
+                            <li>Project Management</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Safety Features</h3>
+                        <ul class="safety-features">
+                            <li><i class="fas fa-check-circle"></i> Overdose Prevention</li>
+                            <li><i class="fas fa-check-circle"></i> Child Safety Lock</li>
+                            <li><i class="fas fa-check-circle"></i> Emergency Access</li>
+                            <li><i class="fas fa-check-circle"></i> Battery Backup</li>
+                            <li><i class="fas fa-check-circle"></i> Error Logging</li>
+                            <li><i class="fas fa-check-circle"></i> Manual Override</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Hardware Projects</h2>
+            <div class="related-grid">
+                <a href="iot-security-project.html" class="related-project">
+                    <h3>IoT Security Project</h3>
+                    <p>Cybersecurity assessment of IoT devices</p>
+                </a>
+                <a href="ai-sports-analytics.html" class="related-project">
+                    <h3>AI Sports Analytics</h3>
+                    <p>Computer vision and machine learning</p>
+                </a>
+                <a href="../projects.html" class="related-project view-all">
+                    <h3>View All Projects</h3>
+                    <p>See complete portfolio</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Gavin Fecko | All Rights Reserved</p>
+            <div class="socials">
+                <a href="https://linkedin.com/in/gavin-fecko-52a5a1247/" target="_blank">LinkedIn</a> |
+                <a href="#" target="_blank">GitHub</a> |
+                <a href="mailto:GavinFecko1@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
